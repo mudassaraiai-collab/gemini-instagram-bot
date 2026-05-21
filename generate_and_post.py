@@ -481,3 +481,242 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ─────────────────────────────────────────────────────────
+#  30-DAY THEN VS NOW SERIES
+#  Indian Family + Dubai Expat Life
+#  English + Arabic Captions
+# ─────────────────────────────────────────────────────────
+
+POSTS_30 = [
+    {
+        "day": 1,
+        "title": "Mom & School Blazer",
+        "prompt_1": "Cinematic Indian realistic illustration, warm golden hour, red brick school building, Indian mother in brown salwar kameez running after school boy with navy blazer, boy with backpack, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, warm evening light, house entrance with plants, Indian mother in yellow saree smiling, holding black leather jacket to son on Royal Enfield motorcycle, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Some things never change 🥺❤️\n\nIn 2010, she ran after you with your school blazer.\nIn 2026, she still runs — this time with your leather jacket.\n\nThe bike upgraded. But her love? Not a single horsepower less. 🛵➡️🏍️\n\nDrop a ❤️ if your mom still does this.\n\n٢٠١٠ مقابل ٢٠٢٦ — بعض الأشياء لا تتغير أبداً\nفي ٢٠١٠، كانت تركض خلفك بالبليزر المدرسي.\nفي ٢٠٢٦، لا تزال تركض — هذه المرة بجاكيتك الجلدي. ❤️\n\n#MomLove #ThenAndNow #2010vs2026 #IndianMom #Nostalgia #Blessed #DubaiLife #ExpatLife"
+    },
+    {
+        "day": 2,
+        "title": "Dad's Old Car vs New Car",
+        "prompt_1": "Cinematic Indian realistic illustration, warm morning light, Indian father in simple shirt teaching teenage son to drive old Maruti 800 car on empty road, both nervous expressions, ultra detailed, bold white text 2005 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, Dubai highway sunset, same son now adult confident driving luxury BMW SUV, father in passenger seat smiling proudly, Dubai skyline visible, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2005 vs 2026 — He taught me everything I know 🚗➡️🚙\n\nIn 2005, he sat next to me in the old Maruti, nervous but proud.\nIn 2026, he sits next to me in Dubai — still nervous. Still proud.\n\nDad, you were right. I did figure it out. 🙏\n\n٢٠٠٥ مقابل ٢٠٢٦ — علّمني كل ما أعرفه\nفي ٢٠٠٥، جلس بجانبي في السيارة القديمة، خائف لكنه فخور.\nفي ٢٠٢٦، يجلس بجانبي في دبي — لا يزال فخوراً. ❤️\n\n#DadGoals #ThenAndNow #IndianDad #DubaiLife #Grateful #FamilyFirst #ExpatLife #Nostalgia"
+    },
+    {
+        "day": 3,
+        "title": "First Salary",
+        "prompt_1": "Cinematic Indian realistic illustration, small Indian office, young man in formal shirt receiving first salary envelope from boss, huge smile, colleagues clapping, ultra detailed, bold white text 2015 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai office glass tower, same man now senior executive in business suit receiving award on stage, large audience, Dubai skyline behind, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2015 vs 2026 — From first salary to first award 🏆\n\nFirst salary: ₹18,000. Spent it all on family dinner.\nFirst Dubai award: Priceless. Still called mom first.\n\nThe currency changed. The values never did. 🙏\n\n٢٠١٥ مقابل ٢٠٢٦ — من أول راتب إلى أول جائزة\nأول راتب: أنفقته كله على عشاء العائلة.\nأول جائزة في دبي: لا تقدر بثمن. اتصلت بأمي أولاً. ❤️\n\n#FirstSalary #CareerGrowth #DubaiLife #IndianExpat #Hustle #ThenAndNow #Grateful #Success"
+    },
+    {
+        "day": 4,
+        "title": "Diwali Then vs Now",
+        "prompt_1": "Cinematic Indian realistic illustration, traditional Indian home courtyard, family in colourful traditional clothes lighting diyas together, children playing with sparklers, warm golden light, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai apartment balcony, Indian family in traditional clothes doing video call with relatives back home, small diya setup, Dubai city lights behind, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Diwali feels different abroad 🪔\n\nIn 2010, the whole family under one roof.\nIn 2026, the whole family on one screen.\n\nSame love. Different timezone. 🥺\n\n٢٠١٠ مقابل ٢٠٢٦ — ديوالي تشعر بشكل مختلف خارج البلاد\nفي ٢٠١٠، العائلة كلها تحت سقف واحد.\nفي ٢٠٢٦، العائلة كلها على شاشة واحدة.\nنفس الحب. منطقة زمنية مختلفة. 🪔\n\n#Diwali #DubaiExpat #IndianAbroad #ThenAndNow #FamilyLove #Nostalgia #DiwaliVibes #HomeAway"
+    },
+    {
+        "day": 5,
+        "title": "School Lunch Box",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian mother early morning in kitchen, lovingly packing steel tiffin lunchbox with roti and sabzi, steam rising, warm kitchen light, ultra detailed, bold white text 2008 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai kitchen, same mother visiting from India, video calling her son at work while cooking his favourite meal, phone propped on counter, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2008 vs 2026 — She still makes sure you eat 😭❤️\n\nIn 2008, she packed your lunch at 6AM before school.\nIn 2026, she video calls at 1PM to ask if you had lunch.\n\nMom's love needs no timezone. 🙏\n\n٢٠٠٨ مقابل ٢٠٢٦ — لا تزال تتأكد من أنك أكلت\nفي ٢٠٠٨، كانت تحضّر غداءك الساعة السادسة صباحاً.\nفي ٢٠٢٦، تتصل الساعة الواحدة ظهراً لتسأل إذا أكلت. ❤️\n\n#MomLife #ThenAndNow #IndianMom #DubaiExpat #LunchBoxMemories #Nostalgia #MomLove #HomeFood"
+    },
+    {
+        "day": 6,
+        "title": "Cricket in the Street vs Dubai Stadium",
+        "prompt_1": "Cinematic Indian realistic illustration, narrow Indian street, group of boys playing cricket with tape ball, improvised stumps, kids cheering, golden afternoon light, ultra detailed, bold white text 2005 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai cricket stadium, same man now playing corporate cricket tournament in proper whites, large crowd, Dubai skyline visible, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2005 vs 2026 — The game never left me 🏏\n\nIn 2005, tape ball cricket on the street after school.\nIn 2026, corporate cricket in Dubai under floodlights.\n\nThe bat got lighter. The dreams got bigger. 🌟\n\n٢٠٠٥ مقابل ٢٠٢٦ — اللعبة لم تتركني أبداً\nفي ٢٠٠٥، كريكيت الشارع بعد المدرسة.\nفي ٢٠٢٦، كريكيت في ملعب دبي. 🏏\n\n#Cricket #ThenAndNow #DubaiLife #IndianExpat #SportsDubai #Hustle #NeverGiveUp #StreetToPro"
+    },
+    {
+        "day": 7,
+        "title": "Sunday Family Breakfast",
+        "prompt_1": "Cinematic Indian realistic illustration, traditional Indian home dining room, joint family Sunday breakfast, grandmother serving hot parathas, everyone talking laughing together, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai cafe, nuclear family Sunday brunch, couple with young children, avocado toast and coffee, cheerful warm ambiance, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Sunday breakfasts hit different 😄\n\nIn 2010: 20 people, parathas, noise, chai, arguments, laughter.\nIn 2026: 4 people, avocado toast, silence, coffee, peace.\n\nBoth perfect. Both missed. 🥺\n\n٢٠١٠ مقابل ٢٠٢٦ — وجبات الإفطار يوم الأحد مختلفة\nفي ٢٠١٠: ٢٠ شخصاً، برياني، ضجيج، شاي، ضحكات.\nفي ٢٠٢٦: ٤ أشخاص، قهوة، هدوء.\nكلاهما رائع. كلاهما مفقود. ❤️\n\n#SundayBreakfast #ThenAndNow #IndianFamily #DubaiLife #FamilyVibes #Nostalgia #HomeFood #ExpatLife"
+    },
+    {
+        "day": 8,
+        "title": "First Phone",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian teenager excitedly showing Nokia 3310 phone to friends in school corridor, everyone amazed, ultra detailed, bold white text 2004 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai home, man upgrading to latest iPhone, young child already expertly using iPad next to him, ironic smile, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2004 vs 2026 — Technology humbles you fast 😂📱\n\nIn 2004, Nokia 3310 made you the coolest kid in class.\nIn 2026, your 3-year-old explains your iPhone to you.\n\nCircle of life. 😅\n\n٢٠٠٤ مقابل ٢٠٢٦ — التكنولوجيا تتطور بسرعة\nفي ٢٠٠٤، نوكيا ٣٣١٠ جعلتك أروع طفل في الفصل.\nفي ٢٠٢٦، طفلك البالغ ٣ سنوات يشرح لك الآيفون. 😂\n\n#NokiaVsiPhone #ThenAndNow #TechLife #DubaiLife #IndianExpat #Parenting #FunnyButTrue #Nostalgia"
+    },
+    {
+        "day": 9,
+        "title": "First Flight",
+        "prompt_1": "Cinematic Indian realistic illustration, busy Indian airport departure hall, young man with large suitcase emotional farewell, mother wiping tears, father strong but emotional, ultra detailed, bold white text 2015 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, Dubai International Airport, same man now confident in business class lounge, video calling parents casually, Dubai duty free visible, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2015 vs 2026 — The airport that changed everything ✈️\n\nIn 2015, first flight. Shaking hands. Tearful goodbyes.\nIn 2026, 47th flight. Business class. Still missing home.\n\nThe ticket class changed. The homesickness never did. 🥺\n\n٢٠١٥ مقابل ٢٠٢٦ — المطار الذي غيّر كل شيء\nفي ٢٠١٥، أول رحلة. يدان ترتجفان. وداع مؤلم.\nفي ٢٠٢٦، الرحلة السابعة والأربعون. درجة أولى. لا يزال الحنين موجوداً. ✈️\n\n#FirstFlight #DubaiExpat #IndianAbroad #ThenAndNow #AirportFeelings #Hustle #MissHome #ExpatLife"
+    },
+    {
+        "day": 10,
+        "title": "Wedding Expectations",
+        "prompt_1": "Cinematic Indian realistic illustration, traditional Indian wedding with hundreds of guests, elaborate decorations, family chaos, bride and groom overwhelmed, colourful chaos, ultra detailed, bold white text 2018 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, intimate Dubai beach wedding, same couple renewing vows, only close family, simple elegant flowers, Dubai coastline, peaceful smiles, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2018 vs 2026 — We learned what actually matters 💍\n\nIn 2018, 500 guests. 3 days. Chaos. Beautiful chaos.\nIn 2026, 20 people. 1 sunset. Peace. Perfect peace.\n\nBoth days, same person. That's the point. ❤️\n\n٢٠١٨ مقابل ٢٠٢٦ — تعلمنا ما يهم حقاً\nفي ٢٠١٨، ٥٠٠ ضيف. ٣ أيام. فوضى جميلة.\nفي ٢٠٢٦، ٢٠ شخصاً. غروب شمس. سلام تام. ❤️\n\n#WeddingLife #ThenAndNow #DubaiWedding #IndianWedding #LoveStory #Married #DubaiLife #CoupleGoals"
+    },
+    {
+        "day": 11,
+        "title": "Homework vs Kids Homework",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian boy struggling with maths homework at wooden desk by lamp light, textbooks everywhere, father helping patiently, ultra detailed, bold white text 2005 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, Dubai apartment study room, Indian father now struggling to help his own child with advanced maths homework on iPad, child looking unimpressed, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2005 vs 2026 — Karma is real 😂📚\n\nIn 2005, dad patiently helped you with maths.\nIn 2026, your kid asks YOU for help.\nAnd suddenly... you understand nothing.\n\nDad, I owe you an apology. 😅\n\n٢٠٠٥ مقابل ٢٠٢٦ — الكارما حقيقية\nفي ٢٠٠٥، ساعدك والدك في الرياضيات بصبر.\nفي ٢٠٢٦، ابنك يطلب منك المساعدة.\nوفجأة... لا تفهم شيئاً. 😂\n\n#ParentingLife #ThenAndNow #DubaiDad #IndianDad #Karma #FunnyButTrue #SchoolLife #DadLife"
+    },
+    {
+        "day": 12,
+        "title": "Ramadan Then vs Now",
+        "prompt_1": "Cinematic Indian realistic illustration, traditional Middle Eastern home, large extended family gathered for iftar, dates, water, traditional food spread, warm lantern light, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai iftar tent, multicultural group of colleagues and friends breaking fast together, Indian expat among them, Dubai skyline, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Ramadan taught me what home means 🌙\n\nIn 2010, iftar was family. Blood family.\nIn 2026, iftar is family. Chosen family.\n\nDubai gave me a second home. 🥺✨\n\n٢٠١٠ مقابل ٢٠٢٦ — رمضان علّمني معنى البيت\nفي ٢٠١٠، الإفطار كان مع العائلة. العائلة الحقيقية.\nفي ٢٠٢٦، الإفطار مع العائلة. العائلة المختارة.\nدبي أعطتني وطناً ثانياً. 🌙\n\n#Ramadan #Iftar #DubaiLife #MulticulturalDubai #IndianExpat #ThenAndNow #RamadanKareem #Dubai"
+    },
+    {
+        "day": 13,
+        "title": "Old Scooter vs Car",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian man on old Hero Honda scooter in rain, plastic bag over helmet, holding grocery bags, determined face, ultra detailed, bold white text 2012 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now driving air-conditioned SUV in Dubai, ordering groceries on phone app, laughing, Dubai road visible, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2012 vs 2026 — The commute upgraded. The work ethic didn't. 💪\n\nIn 2012, scooter in the rain. Grocery bags as waterproofing.\nIn 2026, AC car. Groceries delivered to the door.\n\nBut that scooter taught me everything. 🛵❤️\n\n٢٠١٢ مقابل ٢٠٢٦ — تطورت وسيلة التنقل. لكن أخلاق العمل بقيت.\nفي ٢٠١٢، دراجة في المطر.\nفي ٢٠٢٦، سيارة مكيفة في دبي. 💪\n\n#Hustle #ThenAndNow #GlowUp #DubaiLife #IndianExpat #WorkEthic #FromScratch #NeverForgetWhere"
+    },
+    {
+        "day": 14,
+        "title": "Valentine's Day",
+        "prompt_1": "Cinematic Indian realistic illustration, young Indian couple shy and romantic, boy giving single rose outside college gate, nervous expression, friends watching and teasing, ultra detailed, bold white text 2012 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same couple now, Dubai rooftop restaurant anniversary dinner, city lights behind, comfortable confident love, two kids with them, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2012 vs 2026 — From one rose to forever 🌹\n\nIn 2012, one rose. Sweaty palms. Will she say yes?\nIn 2026, one table for four. Same person. She still says yes.\n\nReal love just gets comfortable. ❤️\n\n٢٠١٢ مقابل ٢٠٢٦ — من وردة واحدة إلى الأبد\nفي ٢٠١٢، وردة واحدة. راحتان متعرقتان. هل ستقبل؟\nفي ٢٠٢٦، طاولة لأربعة. نفس الشخص. لا تزال تقبل. ❤️\n\n#ValentinesDay #ThenAndNow #LoveStory #DubaiCouple #IndianCouple #Married #RealLove #Romantic"
+    },
+    {
+        "day": 15,
+        "title": "First Job Interview",
+        "prompt_1": "Cinematic Indian realistic illustration, nervous young Indian man in oversized suit outside office building, rehearsing answers, ultra detailed, bold white text 2014 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now on other side of table as senior interviewer in Dubai glass office, calm confident, reviewing CV, Dubai skyline behind him, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2014 vs 2026 — From interviewee to interviewer 🤝\n\nIn 2014, nervous outside the door. Suit two sizes too big.\nIn 2026, calm behind the desk. Still remembering that feeling.\n\nAlways be kind to the nervous one. You were them once. 🙏\n\n٢٠١٤ مقابل ٢٠٢٦ — من مُقابَل إلى مُقابِل\nفي ٢٠١٤، متوتر أمام الباب. بدلة كبيرة عليه.\nفي ٢٠٢٦، هادئ خلف المكتب. لا يزال يتذكر ذلك الشعور. 🤝\n\n#CareerGrowth #ThenAndNow #DubaiJobs #IndianExpat #Leadership #Hustle #NeverForget #Success"
+    },
+    {
+        "day": 16,
+        "title": "Mom's Birthday Call",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian family celebrating mom's birthday at home, homemade cake, children singing, father smiling, everyone together, warm light, ultra detailed, bold white text 2009 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, man in Dubai apartment midnight video call, holding store-bought cake to camera, mom on screen laughing and wiping tears, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2009 vs 2026 — Happy Birthday Maa 🎂\n\nIn 2009, homemade cake, everyone together, she pretended to be surprised.\nIn 2026, store cake, video call, she still pretends to be surprised.\n\nSome traditions travel with you. ❤️🥺\n\n٢٠٠٩ مقابل ٢٠٢٦ — عيد ميلاد سعيد يا أماه\nفي ٢٠٠٩، كيكة منزلية، الجميع معاً.\nفي ٢٠٢٦، مكالمة فيديو من دبي، نفس الابتسامة. ❤️\n\n#MomBirthday #ThenAndNow #MomLove #DubaiExpat #IndianMom #FamilyFirst #MissHome #Nostalgia"
+    },
+    {
+        "day": 17,
+        "title": "Old Rented Room vs Own Home",
+        "prompt_1": "Cinematic Indian realistic illustration, tiny shared rented room in Dubai, 3 men with bunk beds, small window, suitcases under bed, hopeful faces, ultra detailed, bold white text 2015 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now in spacious Dubai apartment living room, family around him, own furniture, plants, framed photos, Dubai view from window, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2015 vs 2026 — Every struggle had a purpose 🏠\n\nIn 2015, bunk bed. 3 men. 1 bathroom. Big dreams.\nIn 2026, own apartment. Family. Dubai view. Dreams delivered.\n\nThe room was small. The ambition was not. 💪\n\n٢٠١٥ مقابل ٢٠٢٦ — كل صراع كان له هدف\nفي ٢٠١٥، سرير طابقين. ٣ رجال. حمام واحد. أحلام كبيرة.\nفي ٢٠٢٦، شقة خاصة. عائلة. إطلالة على دبي. الأحلام تحققت. 🏠\n\n#DubaiLife #ThenAndNow #Hustle #GlowUp #IndianExpat #OwnHome #FromScratch #DreamsDoComeTrue"
+    },
+    {
+        "day": 18,
+        "title": "Sister's Wedding",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian brother escorting sister in red bridal lehenga at traditional wedding ceremony, emotional moment, flower decorations, ultra detailed, bold white text 2019 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now video calling sister on her wedding anniversary from Dubai, her with husband and baby, screen glowing in dark room, emotional smile, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2019 vs 2026 — My biggest role was giving you away 💐\n\nIn 2019, I walked you down the aisle. Couldn't look at your face.\nIn 2026, I watch you from a screen. Still can't look at your face.\n\nBig brothers never stop feeling small in these moments. 🥺\n\n٢٠١٩ مقابل ٢٠٢٦ — دوري الأكبر كان تسليمكِ\nفي ٢٠١٩، رافقتكِ في حفل زفافكِ. لم أستطع النظر إلى وجهكِ.\nفي ٢٠٢٦، أشاهدكِ من شاشة. ❤️\n\n#Siblings #ThenAndNow #SisterLove #IndianFamily #BrotherSister #DubaiExpat #FamilyFirst #Nostalgia"
+    },
+    {
+        "day": 19,
+        "title": "Street Food vs Fine Dining",
+        "prompt_1": "Cinematic Indian realistic illustration, young man happily eating pani puri from street vendor in Indian market, paper plate, standing in crowd, 5 rupees, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man at upscale Dubai restaurant, elegant plated food, nice clothes, but looking slightly nostalgic staring at the fancy plate, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Nothing will ever beat ₹5 pani puri 😂🍽️\n\nIn 2010, ₹5 pani puri on the street. Absolute happiness.\nIn 2026, AED 200 dinner in Dubai. Still thinking about pani puri.\n\nThe upgrade is real. The cravings are realer. 😅\n\n٢٠١٠ مقابل ٢٠٢٦ — لا شيء يتفوق على طعام الشارع\nفي ٢٠١٠، طعام شارع بخمس روبيات. سعادة مطلقة.\nفي ٢٠٢٦، عشاء فاخر في دبي. لا يزال يفكر في طعام الشارع. 😂\n\n#StreetFood #ThenAndNow #FoodieLife #DubaiFood #IndianFood #Nostalgia #FineDining #FunnyButTrue"
+    },
+    {
+        "day": 20,
+        "title": "First Car in Dubai",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian expat nervously test driving second-hand old Toyota in Dubai, dealer watching, sweating, ultra detailed, bold white text 2016 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now confidently picking up brand new SUV from Dubai dealership, wife and kids excited beside him, showroom setting, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2016 vs 2026 — Every car told a chapter 🚗\n\nIn 2016, second-hand Toyota. AC barely worked. Proudest day.\nIn 2026, brand new SUV. Family in tow. Still the proudest day.\n\nIt was never about the car. It was about what it meant. 💪\n\n٢٠١٦ مقابل ٢٠٢٦ — كل سيارة حكت فصلاً\nفي ٢٠١٦، تويوتا مستعملة. أفخر يوم في حياته.\nفي ٢٠٢٦، سيارة جديدة. لا يزال أفخر يوم. 🚗\n\n#FirstCar #DubaiLife #ThenAndNow #IndianExpat #Hustle #GlowUp #CarLife #DreamsDoComeTrue"
+    },
+    {
+        "day": 21,
+        "title": "Grandmother's Hands",
+        "prompt_1": "Cinematic Indian realistic illustration, close-up elderly Indian grandmother's hands lovingly feeding young grandson from her hands, warm kitchen, traditional home, ultra detailed, bold white text 2005 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same grandson now adult man in Dubai kitchen, video calling grandmother, trying to cook her recipe, failing slightly, both laughing, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2005 vs 2026 — Her recipe lives in my heart, not my hands 😭❤️\n\nIn 2005, she fed me with her hands. Best food I ever had.\nIn 2026, I try her recipe from 3,000km away. It never tastes the same.\n\nSome flavours only she can make. 🙏\n\n٢٠٠٥ مقابل ٢٠٢٦ — وصفتها تعيش في قلبي\nفي ٢٠٠٥، أطعمتني بيديها. أفضل طعام أكلته في حياتي.\nفي ٢٠٢٦، أحاول وصفتها من مسافة ٣٠٠٠ كيلومتر. لا تشبه أبداً. 😭\n\n#Grandma #ThenAndNow #IndianFamily #HomeFood #DubaiExpat #FamilyLove #Nostalgia #MissHome"
+    },
+    {
+        "day": 22,
+        "title": "Dad's Advice",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian father sitting with teenage son on rooftop at night giving serious life advice, stars visible, simple home background, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same son now father in Dubai, sitting with his own young son on apartment balcony at night, Dubai city lights below, passing wisdom forward, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — Now I finally understand what he meant 🌙\n\nIn 2010, dad said: work hard, stay humble, never forget home.\nIn 2026, I tell my son the exact same words.\n\nSome things are worth passing on. 🙏\n\n٢٠١٠ مقابل ٢٠٢٦ — الآن أفهم ما كان يعنيه\nفي ٢٠١٠، قال أبي: اعمل بجد، كن متواضعاً، لا تنسَ البيت.\nفي ٢٠٢٦، أقول لابني نفس الكلمات. 🌙\n\n#DadAdvice #ThenAndNow #IndianDad #DubaiDad #Parenting #Wisdom #FamilyFirst #GenerationToGeneration"
+    },
+    {
+        "day": 23,
+        "title": "Eid Celebrations",
+        "prompt_1": "Cinematic Indian realistic illustration, colourful Indian Muslim neighbourhood Eid morning, family in new clothes, children getting eidi money, neighbours greeting each other, festive atmosphere, ultra detailed, bold white text 2008 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, Dubai multicultural Eid gathering, same family now with UAE friends and expat community, traditional clothes mix, modern Dubai building behind, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2008 vs 2026 — Eid is bigger when you share it ✨🌙\n\nIn 2008, Eid in the neighbourhood. Everyone knew everyone.\nIn 2026, Eid in Dubai. Everyone is from everywhere. Still the same feeling.\n\nEid Mubarak to the big beautiful family we chose. 🤲\n\nعيد مبارك ٢٠٠٨ vs ٢٠٢٦\nفي ٢٠٠٨، العيد في الحي. الجميع يعرف الجميع.\nفي ٢٠٢٦، العيد في دبي. الجميع من كل مكان. نفس الشعور. 🌙\n\n#EidMubarak #ThenAndNow #DubaiEid #IndianMuslim #MulticulturalDubai #Eid2026 #EidVibes #Dubai"
+    },
+    {
+        "day": 24,
+        "title": "Old Salary vs Dubai Salary",
+        "prompt_1": "Cinematic Indian realistic illustration, young man carefully counting small salary in Indian rupees on bed, budgeting every rupee, small room, determined face, ultra detailed, bold white text 2014 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now making bank transfer on laptop in Dubai home office, sending money to family back home, proud relaxed expression, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2014 vs 2026 — Every rupee counted. Still does. 💰\n\nIn 2014, counting every rupee to survive the month.\nIn 2026, sending money home without checking the balance.\n\nThat's the whole point of the journey. 🙏\n\n٢٠١٤ مقابل ٢٠٢٦ — كل روبية كانت مهمة. لا تزال.\nفي ٢٠١٤، يعدّ كل روبية للبقاء حتى نهاية الشهر.\nفي ٢٠٢٦، يرسل المال إلى المنزل دون التحقق من الرصيد. 💰\n\n#MoneyMindset #ThenAndNow #DubaiLife #IndianExpat #Hustle #Remittance #FamilyFirst #GlowUp"
+    },
+    {
+        "day": 25,
+        "title": "Children's School",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian government school classroom, crowded benches, chalk blackboard, children in simple uniforms attentive, ultra detailed, bold white text 2000 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, modern Dubai international school, same man dropping his child at premium school entrance, child in smart uniform, tablet in bag, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2000 vs 2026 — I studied so you don't have to struggle 📚\n\nIn 2000, chalk boards, crowded benches, basic textbooks.\nIn 2026, my child has a school I could only dream of.\n\nEvery sacrifice made sense today. 🙏\n\n٢٠٠٠ مقابل ٢٠٢٦ — درست حتى لا تعاني أنت\nفي ٢٠٠٠، سبورة طباشير، مقاعد مزدحمة، كتب بسيطة.\nفي ٢٠٢٦، طفلي في مدرسة كنت أحلم بها. 📚\n\n#Education #ThenAndNow #DubaiSchool #IndianExpat #Parenting #Sacrifice #DreamsDoComeTrue #FamilyFirst"
+    },
+    {
+        "day": 26,
+        "title": "Old Friends Reunion",
+        "prompt_1": "Cinematic Indian realistic illustration, group of Indian college friends in hostel room, laughing on floor with instant noodles and chai, carefree young faces, ultra detailed, bold white text 2013 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same group of friends now reunited in Dubai rooftop restaurant, business casual, some with grey hair, same laughter, Dubai skyline behind, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2013 vs 2026 — Real friends find their way back 🤝\n\nIn 2013, instant noodles at midnight. Nowhere to be. Nothing to lose.\nIn 2026, Dubai rooftop. Everywhere to be. Everything to be grateful for.\n\nSame chaos. Better shoes. 😂❤️\n\n٢٠١٣ مقابل ٢٠٢٦ — الأصدقاء الحقيقيون يجدون طريقهم دائماً\nفي ٢٠١٣، نودلز فورية في منتصف الليل. لا شيء لنخسره.\nفي ٢٠٢٦، سطح دبي. نفس الضحكات. أحذية أفضل. 😂\n\n#Friendship #ThenAndNow #DubaiLife #CollegeFriends #Reunion #OldFriends #IndianExpat #Nostalgia"
+    },
+    {
+        "day": 27,
+        "title": "Cooking Skills",
+        "prompt_1": "Cinematic Indian realistic illustration, young Indian bachelor in tiny Dubai kitchen burning simple dal on stove, smoke everywhere, looking helpless, calling mom on phone, ultra detailed, bold white text 2015 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now confidently cooking elaborate Indian meal in beautiful Dubai kitchen, wife watching impressed, children excited, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2015 vs 2026 — Necessity is the best teacher 👨‍🍳😂\n\nIn 2015, burnt dal and a panicked call to mom.\nIn 2026, biryani from scratch on a Friday evening.\n\nSurvival taught me things no cooking class could. 😅\n\n٢٠١٥ مقابل ٢٠٢٦ — الحاجة أفضل معلم\nفي ٢٠١٥، عدس محروق ومكالمة مذعورة للأم.\nفي ٢٠٢٦، برياني من الصفر يوم الجمعة. 👨‍🍳\n\n#CookingLife #ThenAndNow #DubaiLife #IndianFood #BatchelorLife #MarriedLife #FunnyButTrue #HomeChef"
+    },
+    {
+        "day": 28,
+        "title": "Parents First Visit to Dubai",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian parents at Dubai airport arrival, mother in saree looking amazed at the airport, father trying to look calm but equally amazed, son waiting excitedly, ultra detailed, bold white text 2017 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same parents now relaxed on Dubai apartment balcony with tea, watching city view like locals, smiling proudly at their son's home, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2017 vs 2026 — Watching them see my world 🥺\n\nIn 2017, their first time here. Mom gripped my hand at the airport.\nIn 2026, they sit on my balcony with chai like it's their own home.\n\nMaking them proud was always the whole plan. 🙏❤️\n\n٢٠١٧ مقابل ٢٠٢٦ — مشاهدتهم يرون عالمي\nفي ٢٠١٧، زيارتهم الأولى. أمسكت أمي بيدي في المطار.\nفي ٢٠٢٦، يجلسان على شرفتي بالشاي كأنه بيتهم. ❤️\n\n#ParentsVisit #ThenAndNow #DubaiLife #IndianExpat #MomAndDad #FamilyFirst #MakingThemProud #Grateful"
+    },
+    {
+        "day": 29,
+        "title": "New Year Celebration",
+        "prompt_1": "Cinematic Indian realistic illustration, Indian family watching New Year fireworks on small TV at home, simple celebration, homemade snacks, everyone in pyjamas, happy faces, ultra detailed, bold white text 2010 bottom right, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same family watching spectacular Dubai New Year fireworks live from waterfront, massive crowd, Burj Khalifa lit up, children on shoulders, ultra detailed, bold white text 2026 bottom right, 1:1 ratio",
+        "caption": "2010 vs 2026 — We upgraded the fireworks 🎆\n\nIn 2010, New Year on TV. Pyjamas. Homemade snacks. Perfect.\nIn 2026, New Year in Dubai. Burj Khalifa. Thousands around. Also perfect.\n\nHappiness was never about the view. ❤️\n\n٢٠١٠ مقابل ٢٠٢٦ — طورنا الألعاب النارية\nفي ٢٠١٠، رأس السنة على التلفاز. بيجامات. طعام منزلي. مثالي.\nفي ٢٠٢٦، رأس السنة في دبي. برج خليفة. آلاف الناس. مثالي أيضاً. 🎆\n\n#NewYear #ThenAndNow #DubaiNewYear #BurjKhalifa #IndianExpat #FamilyFirst #Grateful #2026"
+    },
+    {
+        "day": 30,
+        "title": "The Journey",
+        "prompt_1": "Cinematic Indian realistic illustration, young determined Indian man at dawn standing outside small house with one suitcase, looking at horizon with hope, simple neighbourhood, ultra detailed, bold white text THE BEGINNING bottom, 1:1 ratio",
+        "prompt_2": "Cinematic Indian realistic illustration, same man now standing on Dubai rooftop at dawn, family behind him, confident relaxed posture, city skyline ahead, peaceful smile, ultra detailed, bold white text THE ARRIVAL bottom, 1:1 ratio",
+        "caption": "The Beginning vs The Arrival — 30 days of stories. One truth. 🌅\n\nEvery post this month was one chapter of the same book.\nA boy who left home to build a home.\n\nThank you for being part of the journey. It's far from over. 🙏✨\n\nالبداية vs الوصول — ٣٠ يوماً من القصص. حقيقة واحدة.\nكل منشور هذا الشهر كان فصلاً من نفس الكتاب.\nفتى غادر بيته لبناء بيت.\nشكراً لكونكم جزءاً من الرحلة. ❤️\n\n#TheJourney #DubaiLife #IndianExpat #ThenAndNow #30Days #Grateful #Hustle #HomeAwayFromHome #Dubai"
+    }
+]
+
+
+def run_thenvsnow(day_num):
+    """Run a specific Then vs Now post by day number (1-30)."""
+    if day_num < 1 or day_num > len(POSTS_30):
+        print(f"❌ Day must be between 1 and {len(POSTS_30)}")
+        return
+    post = POSTS_30[day_num - 1]
+    print(f"\n{'='*55}")
+    print(f"  📅  Day {day_num}: {post['title']}")
+    print(f"{'='*55}")
+    os.makedirs("output", exist_ok=True)
+    img1     = generate_image(post["prompt_1"], f"output/thenvsnow_day{day_num:02d}_a.jpg")
+    img2     = generate_image(post["prompt_2"], f"output/thenvsnow_day{day_num:02d}_b.jpg")
+    combined = combine_and_crop(img1, img2, f"output/thenvsnow_day{day_num:02d}_final.jpg")
+    url      = upload_to_imgbb(combined)
+    mid      = instagram_post(url, post["caption"])
+    print(f"\n  ✅ Day {day_num} LIVE on @maddy_4589! ID: {mid}\n")
+    return mid
