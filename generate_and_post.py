@@ -1,8 +1,8 @@
 """
-Gemini Image Generation + Instagram Auto-Poster
+Gemini Instagram Bot
 ================================================
 Author: Mudassar Ansari (@mudassaraiai-collab)
-Version: 2.0 — Kids Food Series Edition
+Version: 3.0 — Kids Food Series + Free Image Generation
 Account: @maddy_4589 | FS Ladurée GCC
 
 Series:
@@ -15,17 +15,20 @@ Usage:
     python generate_and_post.py               # auto-post next in rotation
     python generate_and_post.py --list        # show all episodes + status
     python generate_and_post.py --series chef --ep 1   # post specific
+
+Setup:
+    pip install -r requirements.txt
+    cp .env.example .env
+    python generate_and_post.py --list
 """
 
 import os, io, time, base64, argparse, json
 import requests
 from PIL import Image
 from dotenv import load_dotenv
-import google.generativeai as genai
 
 load_dotenv()
 
-GEMINI_API_KEY    = os.getenv("GEMINI_API_KEY")
 IG_USER_ID        = os.getenv("IG_USER_ID", "27551421421125823")
 IG_ACCESS_TOKEN   = os.getenv("IG_ACCESS_TOKEN")
 IMGBB_API_KEY     = os.getenv("IMGBB_API_KEY")
@@ -44,16 +47,8 @@ SERIES = {
         "episodes": [
             {
                 "title": "Can a 6-year-old make a macaron?",
-                "prompt_1": (
-                    "Cinematic warm pastel kitchen, adorable 6-year-old child wearing tiny white chef hat "
-                    "and apron, concentrating hard while piping pink macaron batter onto a baking sheet, "
-                    "Ladurée-style backdrop, professional food photography lighting, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Same adorable child holding up a slightly imperfect but cute pink macaron with a huge "
-                    "proud smile, pastel kitchen background, Ladurée boxes visible, golden hour lighting, "
-                    "ultra detailed, 1:1 ratio"
-                ),
+                "prompt_1": "Cinematic warm pastel kitchen adorable 6-year-old child tiny white chef hat apron piping pink macaron batter baking sheet ultra detailed",
+                "prompt_2": "Adorable child holding imperfect pink macaron huge proud smile pastel Laduree kitchen golden hour ultra detailed",
                 "caption": (
                     "🍪 Can a 6-year-old make a real Ladurée macaron? We tried it — and THIS happened! 👨‍🍳✨\n\n"
                     "Welcome to Little Chef Lab — where tiny hands make BIG food magic! 🎉\n\n"
@@ -66,16 +61,8 @@ SERIES = {
             },
             {
                 "title": "The pinkest cake ever",
-                "prompt_1": (
-                    "Adorable child in pink apron pouring bright pink batter into cake tin, "
-                    "pastel kitchen, flour on nose, laughing expression, warm lighting, "
-                    "professional food photography, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Stunning all-pink layered birthday cake on marble counter, rose decorations, "
-                    "gold sprinkles, Ladurée-style presentation, pastel backdrop, "
-                    "professional food photography, ultra detailed, 1:1 ratio"
-                ),
+                "prompt_1": "Adorable child pink apron pouring bright pink batter cake tin pastel kitchen flour on nose laughing warm lighting",
+                "prompt_2": "Stunning all-pink layered birthday cake marble counter rose decorations gold sprinkles Laduree style professional photography",
                 "caption": (
                     "🎂 We made the PINKEST cake ever — and kids went absolutely wild! 🌸\n\n"
                     "Little Chef Lab EP2 — this week it's all about pink, sugar, and happy faces!\n\n"
@@ -87,15 +74,8 @@ SERIES = {
             },
             {
                 "title": "3 ingredients 5 minutes",
-                "prompt_1": (
-                    "Child hands carefully measuring three ingredients on clean kitchen counter, "
-                    "tiny bowls of flour sugar butter, overhead shot pastel kitchen, "
-                    "professional food styling, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Perfectly golden shortbread biscuits cooling on rack, child peeking from background "
-                    "with huge smile, pastel kitchen, warm lighting, professional food photography, 1:1 ratio"
-                ),
+                "prompt_1": "Child hands measuring three ingredients kitchen counter tiny bowls flour sugar butter overhead shot pastel kitchen professional styling",
+                "prompt_2": "Perfectly golden shortbread biscuits cooling rack child peeking background huge smile pastel kitchen warm lighting",
                 "caption": (
                     "🥚 3 ingredients. 5 minutes. Kids made MAGIC in the kitchen today! ⏱️✨\n\n"
                     "Little Chef Lab EP3 — the easiest recipe that made the biggest smiles!\n\n"
@@ -107,15 +87,8 @@ SERIES = {
             },
             {
                 "title": "Chocolate vs vanilla the great debate",
-                "prompt_1": (
-                    "Two children in aprons facing each other at kitchen counter, one holding chocolate macaron "
-                    "one holding vanilla macaron, playful argument expressions, vibrant pastel kitchen, "
-                    "professional food photography, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Beautiful side by side comparison, dark chocolate macaron vs creamy vanilla macaron "
-                    "on marble surface, dramatic studio lighting, ultra detailed, 1:1 ratio"
-                ),
+                "prompt_1": "Two children aprons facing each other kitchen counter one holding chocolate macaron one vanilla playful argument pastel kitchen",
+                "prompt_2": "Beautiful side by side dark chocolate macaron vs creamy vanilla macaron marble surface dramatic studio lighting ultra detailed",
                 "caption": (
                     "🍫 Chocolate vs vanilla — the great kid debate! 🍦😂\n\n"
                     "Little Chef Lab EP4 had us all laughing AND eating!\n\n"
@@ -133,16 +106,8 @@ SERIES = {
         "episodes": [
             {
                 "title": "Blindfolded taste test",
-                "prompt_1": (
-                    "Adorable child wearing silk blindfold, sitting at pastel table, mysterious Ladurée "
-                    "gift box in front, hands reaching forward, excited expression, warm lighting, "
-                    "professional food photography, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child's face mid-expression tasting macaron for the first time, pure joy and surprise, "
-                    "pastel Ladurée macarons scattered beautifully on marble, vibrant colours, "
-                    "professional food photography, 1:1 ratio"
-                ),
+                "prompt_1": "Adorable child wearing silk blindfold sitting pastel table mysterious Laduree gift box hands reaching forward excited expression",
+                "prompt_2": "Child face mid-expression tasting macaron first time pure joy surprise pastel Laduree macarons marble vibrant colours",
                 "caption": (
                     "😱 Blindfolded taste test — can kids guess the Ladurée flavour?!\n\n"
                     "What's Inside? EP1 — the most delicious guessing game your family will ever play! 🎭🍬\n\n"
@@ -155,14 +120,8 @@ SERIES = {
             },
             {
                 "title": "Unboxing the Laduree gift box",
-                "prompt_1": (
-                    "Iconic Ladurée pale green gift box with gold ribbon on white marble surface, "
-                    "soft natural light, elegant Parisian styling, luxury food photography, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child's face with wide eyes and open mouth in pure amazement, rainbow of Ladurée "
-                    "macarons revealed in beautiful box, pastel background, warm lighting, 1:1 ratio"
-                ),
+                "prompt_1": "Iconic Laduree pale green gift box gold ribbon white marble soft natural light elegant Parisian luxury food photography",
+                "prompt_2": "Child face wide eyes open mouth amazement rainbow Laduree macarons revealed beautiful box pastel background warm lighting",
                 "caption": (
                     "📦 We unboxed the most BEAUTIFUL Ladurée gift box — kids lost their minds! 🎁😍\n\n"
                     "What's Inside? EP2 — unboxing luxury French treats in Dubai! 🇫🇷🇦🇪\n\n"
@@ -174,14 +133,8 @@ SERIES = {
             },
             {
                 "title": "5 flavours 1 blindfold",
-                "prompt_1": (
-                    "Five different coloured Ladurée macarons lined up on marble, each a distinct vibrant "
-                    "colour, numbered tags 1-5, elegant flat lay, professional food photography, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child pulling funny face while tasting surprise macaron flavour blindfolded, "
-                    "huge laugh, pastel kitchen, colourful macarons background, 1:1 ratio"
-                ),
+                "prompt_1": "Five different coloured Laduree macarons lined up marble numbered tags elegant flat lay professional food photography",
+                "prompt_2": "Child pulling funny face tasting surprise macaron flavour blindfolded huge laugh pastel kitchen colourful macarons background",
                 "caption": (
                     "🎯 5 flavours. 1 blindfold. Zero wrong answers — only delicious ones! 😂🍪\n\n"
                     "What's Inside? EP3 — our most chaotic taste test yet!\n\n"
@@ -193,14 +146,8 @@ SERIES = {
             },
             {
                 "title": "Mum vs kids taste test",
-                "prompt_1": (
-                    "Mum and young child sitting opposite each other at kitchen table, both wearing "
-                    "blindfolds, Ladurée macarons between them, competitive playful expressions, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child celebrating arms up while mum laughs with wrong answer, macarons on table, "
-                    "pastel kitchen, warm family scene, professional photography, 1:1 ratio"
-                ),
+                "prompt_1": "Mum and young child sitting opposite kitchen table both wearing blindfolds Laduree macarons between them competitive playful expressions",
+                "prompt_2": "Child celebrating arms up while mum laughs wrong answer macarons table pastel kitchen warm family scene",
                 "caption": (
                     "👩‍👧 Can mum guess the flavour better than the kids? SPOILER: No. 😂\n\n"
                     "What's Inside? EP4 — Mum vs Kids edition!\n\n"
@@ -218,16 +165,8 @@ SERIES = {
         "episodes": [
             {
                 "title": "Match the macaron to the crayon",
-                "prompt_1": (
-                    "Flat lay of 8 Ladurée macarons in rainbow colours arranged in perfect arc on marble, "
-                    "soft studio lighting, each macaron perfectly distinct colour, "
-                    "professional food photography, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child hand holding coloured crayons next to matching coloured macarons, pastel "
-                    "background, overhead shot, perfect colour matching, bright cheerful lighting, "
-                    "professional food styling, 1:1 ratio"
-                ),
+                "prompt_1": "Flat lay 8 Laduree macarons rainbow colours perfect arc marble soft studio lighting professional food photography",
+                "prompt_2": "Child hand holding coloured crayons next matching coloured macarons pastel background overhead shot bright cheerful lighting",
                 "caption": (
                     "🌈 Match the macaron to the crayon! Can you guess all 8 colours? 🖍️\n\n"
                     "Welcome to Colour My Food — the most colourful food series for little eyes!\n\n"
@@ -240,15 +179,8 @@ SERIES = {
             },
             {
                 "title": "Everything yellow",
-                "prompt_1": (
-                    "Beautiful flat lay of yellow foods — lemon macarons, banana slices, yellow macarons, "
-                    "golden honey drizzle, sunflower, all on white marble, bright studio lighting, "
-                    "professional food photography, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Happy child holding bright yellow macaron up to sunlight, yellow outfit, sunny "
-                    "outdoor setting, golden hour, huge smile, professional photography, 1:1 ratio"
-                ),
+                "prompt_1": "Beautiful flat lay yellow foods lemon macarons banana slices golden honey drizzle sunflower white marble bright studio lighting",
+                "prompt_2": "Happy child holding bright yellow macaron up sunlight yellow outfit sunny outdoor golden hour huge smile",
                 "caption": (
                     "💛 Everything YELLOW — and it's all delicious! 🌟🍋🌼\n\n"
                     "Colour My Food EP2 — lemon macarons, banana treats, golden pastries!\n\n"
@@ -260,14 +192,8 @@ SERIES = {
             },
             {
                 "title": "Everything pink",
-                "prompt_1": (
-                    "Gorgeous flat lay of pink foods — strawberry macarons, rose cream, raspberry tarts, "
-                    "pink flowers, all on white marble, soft pink lighting, luxury food photography, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child in pink dress surrounded by pink Ladurée macarons, delighted expression, "
-                    "pastel pink background, professional photography, 1:1 ratio"
-                ),
+                "prompt_1": "Gorgeous flat lay pink foods strawberry macarons rose cream raspberry tarts pink flowers white marble soft pink lighting",
+                "prompt_2": "Child pink dress surrounded pink Laduree macarons delighted expression pastel pink background professional photography",
                 "caption": (
                     "🩷 PINK everything — because life is better in pink! 💗🌸\n\n"
                     "Colour My Food EP3 — strawberry, rose, raspberry!\n\n"
@@ -279,14 +205,8 @@ SERIES = {
             },
             {
                 "title": "The rainbow plate",
-                "prompt_1": (
-                    "Stunning circular rainbow arrangement of 8 coloured Ladurée macarons on white marble, "
-                    "one of each colour of the rainbow, perfectly styled, dramatic studio lighting, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child's face in absolute wonder looking at rainbow macaron plate, eyes wide, "
-                    "beautiful colours reflecting on face, magical atmosphere, professional photography, 1:1 ratio"
-                ),
+                "prompt_1": "Stunning circular rainbow arrangement 8 coloured Laduree macarons white marble one each colour perfectly styled dramatic lighting",
+                "prompt_2": "Child face absolute wonder looking rainbow macaron plate eyes wide beautiful colours magical atmosphere professional photography",
                 "caption": (
                     "🌈 THE RAINBOW PLATE — all 8 colours together for the first time! 🎊✨\n\n"
                     "Colour My Food EP4 — the most colourful thing on your feed today!\n\n"
@@ -304,14 +224,8 @@ SERIES = {
         "episodes": [
             {
                 "title": "Paris to Dubai the macaron journey",
-                "prompt_1": (
-                    "Elegant Ladurée patisserie storefront in Paris, golden Eiffel Tower visible behind, "
-                    "pastel green facade, warm morning light, cinematic photography, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Ladurée macarons displayed in Dubai luxury boutique, modern glass display case, "
-                    "Dubai skyline visible through window, golden light, ultra detailed, 1:1 ratio"
-                ),
+                "prompt_1": "Elegant Laduree patisserie storefront Paris golden Eiffel Tower visible pastel green facade warm morning cinematic ultra detailed",
+                "prompt_2": "Laduree macarons displayed Dubai luxury boutique modern glass display case Dubai skyline window golden light ultra detailed",
                 "caption": (
                     "✈️ How does a tiny macaron travel 5,500 km from Paris to Dubai?!\n\n"
                     "Welcome to Food Travels — follow your favourite treats on their world journey! 🌍\n\n"
@@ -323,14 +237,8 @@ SERIES = {
             },
             {
                 "title": "The cold chain secret",
-                "prompt_1": (
-                    "Refrigerated cargo plane loading luxury food boxes, blue cold mist, dramatic lighting, "
-                    "macarons visible in temperature-controlled container, ultra detailed, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child-friendly illustrated map showing Paris to Dubai route with snowflake cold chain "
-                    "symbols, aeroplane path, clean pastel colours, educational style, 1:1 ratio"
-                ),
+                "prompt_1": "Refrigerated cargo plane loading luxury food boxes blue cold mist dramatic lighting macarons temperature controlled container",
+                "prompt_2": "Child friendly illustrated map Paris to Dubai route snowflake cold chain symbols aeroplane path clean pastel colours educational",
                 "caption": (
                     "🌡️ How do macarons stay PERFECT on a 5,500 km journey? The cold chain secret! ❄️\n\n"
                     "Food Travels EP2 — the science behind keeping luxury food fresh from Paris to Dubai!\n\n"
@@ -342,14 +250,8 @@ SERIES = {
             },
             {
                 "title": "Inside the Paris kitchen",
-                "prompt_1": (
-                    "Elegant Parisian patisserie kitchen, skilled pastry chef piping perfect macaron shells, "
-                    "gleaming copper pots, warm golden light, ultra detailed cinematic, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Close-up of perfectly formed macaron shells cooling on professional baking trays, "
-                    "Ladurée kitchen backdrop, soft lighting, ultra detailed food photography, 1:1 ratio"
-                ),
+                "prompt_1": "Elegant Parisian patisserie kitchen skilled pastry chef piping perfect macaron shells gleaming copper pots warm golden light cinematic",
+                "prompt_2": "Close-up perfectly formed macaron shells cooling professional baking trays Laduree kitchen backdrop soft lighting ultra detailed",
                 "caption": (
                     "🇫🇷 It all starts in Paris — inside the legendary Ladurée kitchen! 👨‍🍳🥐\n\n"
                     "Food Travels EP3 — the birthplace of the world's most famous macaron!\n\n"
@@ -361,14 +263,8 @@ SERIES = {
             },
             {
                 "title": "6 countries 1 macaron",
-                "prompt_1": (
-                    "Colourful world map with glowing route from France through Switzerland to UAE, "
-                    "macaron icons at key stops, professional infographic style, vibrant colours, 1:1 ratio"
-                ),
-                "prompt_2": (
-                    "Child holding globe looking at map with wonder, Ladurée macarons on world map "
-                    "spread, educational fun atmosphere, warm lighting, professional photography, 1:1 ratio"
-                ),
+                "prompt_1": "Colourful world map glowing route France through Switzerland to UAE macaron icons key stops professional infographic vibrant colours",
+                "prompt_2": "Child holding globe looking map wonder Laduree macarons world map spread educational fun atmosphere warm lighting",
                 "caption": (
                     "🌍 6 countries, 1 macaron — the most well-travelled treat in the world! 🗺️\n\n"
                     "Food Travels EP4 — the FULL journey from farm to flour to Paris to Dubai!\n\n"
@@ -384,41 +280,65 @@ SERIES = {
 
 
 # ─────────────────────────────────────────────────────────
-#  CORE FUNCTIONS
+#  IMAGE GENERATION — Free via Pollinations AI
 # ─────────────────────────────────────────────────────────
 
-def generate_image_gemini(prompt, output_path):
-    print(f"  🎨 Generating: {prompt[:70]}...")
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.0-flash-exp")
-    response = model.generate_content(
-        prompt,
-        generation_config=genai.GenerationConfig(response_modalities=["image", "text"])
+def generate_image(prompt, output_path):
+    """Generate image using Pollinations AI — completely free, no API key needed."""
+    print(f"  🎨 Generating: {prompt[:60]}...")
+    url = (
+        f"https://image.pollinations.ai/prompt/{requests.utils.quote(prompt)}"
+        f"?width=1080&height=1080&nologo=true&seed={hash(prompt) % 99999}"
     )
-    for part in response.candidates[0].content.parts:
-        if part.inline_data and part.inline_data.mime_type.startswith("image/"):
-            img = Image.open(io.BytesIO(base64.b64decode(part.inline_data.data)))
-            img.save(output_path)
+    for attempt in range(3):
+        try:
+            r = requests.get(url, timeout=120)
+            r.raise_for_status()
+            img = Image.open(io.BytesIO(r.content)).convert("RGB")
+            img.save(output_path, quality=95)
             print(f"  ✅ Saved: {output_path}")
             return output_path
-    raise ValueError("Gemini returned no image.")
+        except Exception as e:
+            print(f"  ⚠️ Attempt {attempt+1} failed: {e}. Retrying...")
+            time.sleep(5)
+    raise ValueError(f"Image generation failed after 3 attempts.")
 
 
-def combine_images_vertically(img1_path, img2_path, output_path):
-    img1 = Image.open(img1_path).convert("RGB")
-    img2 = Image.open(img2_path).convert("RGB")
+# ─────────────────────────────────────────────────────────
+#  IMAGE PROCESSING
+# ─────────────────────────────────────────────────────────
+
+def combine_and_crop(img1_path, img2_path, output_path):
+    """Combine two images vertically then crop to Instagram-safe 4:5 ratio."""
+    i1 = Image.open(img1_path).convert("RGB")
+    i2 = Image.open(img2_path).convert("RGB")
     w = 1080
-    h1 = int(img1.height * w / img1.width)
-    h2 = int(img2.height * w / img2.width)
-    img1 = img1.resize((w, h1), Image.LANCZOS)
-    img2 = img2.resize((w, h2), Image.LANCZOS)
+    h1 = int(i1.height * w / i1.width)
+    h2 = int(i2.height * w / i2.width)
+    i1 = i1.resize((w, h1), Image.LANCZOS)
+    i2 = i2.resize((w, h2), Image.LANCZOS)
     combined = Image.new("RGB", (w, h1 + h2))
-    combined.paste(img1, (0, 0))
-    combined.paste(img2, (0, h1))
+    combined.paste(i1, (0, 0))
+    combined.paste(i2, (0, h1))
+    # Crop to 4:5 ratio (1080x1350) — Instagram portrait, max coverage
+    target_h = 1350
+    total_h = h1 + h2
+    if total_h >= target_h:
+        top = (total_h - target_h) // 2
+        combined = combined.crop((0, top, w, top + target_h))
+    else:
+        # Pad with white if too short
+        padded = Image.new("RGB", (w, target_h), (255, 255, 255))
+        padded.paste(combined, (0, (target_h - total_h) // 2))
+        combined = padded
     combined.save(output_path, quality=95)
-    print(f"  🖼️  Combined: {output_path}")
+    print(f"  🖼️  Saved: {output_path} (1080x1350)")
     return output_path
 
+
+# ─────────────────────────────────────────────────────────
+#  IMGBB UPLOAD
+# ─────────────────────────────────────────────────────────
 
 def upload_to_imgbb(image_path):
     print(f"  📤 Uploading to ImgBB...")
@@ -435,31 +355,39 @@ def upload_to_imgbb(image_path):
     raise ValueError(f"ImgBB upload failed: {result}")
 
 
-def instagram_create_container(image_url, caption):
+# ─────────────────────────────────────────────────────────
+#  INSTAGRAM PUBLISH
+# ─────────────────────────────────────────────────────────
+
+def instagram_post(image_url, caption):
+    # Create container
     r = requests.post(
         f"{GRAPH_BASE_URL}/{IG_USER_ID}/media",
         data={"image_url": image_url, "caption": caption,
               "access_token": IG_ACCESS_TOKEN}, timeout=30
     )
     r.raise_for_status()
-    cid = r.json()["id"]
+    resp = r.json()
+    if "id" not in resp:
+        raise ValueError(f"Container failed: {resp}")
+    cid = resp["id"]
     print(f"  📦 Container: {cid}")
-    return cid
-
-
-def instagram_publish(container_id, max_wait=90):
+    # Wait and publish
     print(f"  ⏳ Processing...")
-    for _ in range(max_wait // 3):
+    for _ in range(30):
         time.sleep(3)
-        r = requests.get(f"{GRAPH_BASE_URL}/{container_id}",
-                         params={"fields": "status_code", "access_token": IG_ACCESS_TOKEN})
-        status = r.json().get("status_code", "")
+        s = requests.get(f"{GRAPH_BASE_URL}/{cid}",
+                         params={"fields": "status_code",
+                                 "access_token": IG_ACCESS_TOKEN}).json()
+        status = s.get("status_code", "")
         if status == "FINISHED":
             break
         if status == "ERROR":
             raise ValueError("Container processing failed.")
-    r = requests.post(f"{GRAPH_BASE_URL}/{IG_USER_ID}/media_publish",
-                      data={"creation_id": container_id, "access_token": IG_ACCESS_TOKEN})
+    r = requests.post(
+        f"{GRAPH_BASE_URL}/{IG_USER_ID}/media_publish",
+        data={"creation_id": cid, "access_token": IG_ACCESS_TOKEN}
+    )
     r.raise_for_status()
     mid = r.json()["id"]
     print(f"  🎉 Published! Instagram ID: {mid}")
@@ -467,7 +395,7 @@ def instagram_publish(container_id, max_wait=90):
 
 
 # ─────────────────────────────────────────────────────────
-#  STATE — track what has been posted
+#  STATE TRACKING
 # ─────────────────────────────────────────────────────────
 
 def load_state():
@@ -483,9 +411,7 @@ def save_state(state):
 
 
 def get_next_post(state):
-    """Round-robin: pick series with fewest posted episodes."""
-    order = ["chef", "inside", "colour", "travels"]
-    for key in order:
+    for key in ["chef", "inside", "colour", "travels"]:
         idx = state.get(key, 0)
         if idx < len(SERIES[key]["episodes"]):
             return key, idx
@@ -507,12 +433,11 @@ def run_pipeline(series_key, ep_index):
     print("=" * 55)
 
     os.makedirs("output", exist_ok=True)
-    img1     = generate_image_gemini(ep["prompt_1"], f"output/{series_key}_ep{num}_a.jpg")
-    img2     = generate_image_gemini(ep["prompt_2"], f"output/{series_key}_ep{num}_b.jpg")
-    combined = combine_images_vertically(img1, img2, f"output/{series_key}_ep{num}_combined.jpg")
+    img1     = generate_image(ep["prompt_1"], f"output/{series_key}_ep{num}_a.jpg")
+    img2     = generate_image(ep["prompt_2"], f"output/{series_key}_ep{num}_b.jpg")
+    combined = combine_and_crop(img1, img2, f"output/{series_key}_ep{num}_final.jpg")
     url      = upload_to_imgbb(combined)
-    cid      = instagram_create_container(url, ep["caption"])
-    mid      = instagram_publish(cid)
+    mid      = instagram_post(url, ep["caption"])
 
     print(f"\n  ✅ LIVE on @maddy_4589! Media ID: {mid}\n")
     return mid
@@ -520,7 +445,7 @@ def run_pipeline(series_key, ep_index):
 
 def list_all():
     state = load_state()
-    print("\n📋 gemini-instagram-bot v2.0 — Content Library")
+    print("\n📋 gemini-instagram-bot v3.0 — Content Library")
     print("=" * 55)
     for key, s in SERIES.items():
         posted = state.get(key, 0)
@@ -537,12 +462,11 @@ def list_all():
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Gemini Instagram Bot v2.0 — Kids Food Series @maddy_4589"
+        description="Instagram Bot v3.0 — Kids Food Series @maddy_4589"
     )
-    parser.add_argument("--series", choices=["chef", "inside", "colour", "travels"],
-                        help="Which series to post")
-    parser.add_argument("--ep", type=int, help="Episode number (1-based)")
-    parser.add_argument("--list", action="store_true", help="List all episodes and status")
+    parser.add_argument("--series", choices=["chef", "inside", "colour", "travels"])
+    parser.add_argument("--ep", type=int)
+    parser.add_argument("--list", action="store_true")
     args = parser.parse_args()
 
     if args.list:
@@ -557,7 +481,7 @@ def main():
     else:
         series_key, ep_index = get_next_post(state)
         if series_key is None:
-            print("🎉 All episodes posted! Add more content to SERIES.")
+            print("🎉 All episodes posted!")
             return
 
     run_pipeline(series_key, ep_index)
@@ -567,3 +491,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
