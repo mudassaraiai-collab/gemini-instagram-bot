@@ -303,28 +303,63 @@ def generate_image(prompt, output_path):
 # ─────────────────────────────────────────────────────────
 
 def combine_and_crop(img1_path, img2_path, output_path):
-    i1 = Image.open(img1_path).convert("RGB")
-    i2 = Image.open(img2_path).convert("RGB")
-    w = 1080
-    h1 = int(i1.height * w / i1.width)
-    h2 = int(i2.height * w / i2.width)
-    i1 = i1.resize((w, h1), Image.LANCZOS)
-    i2 = i2.resize((w, h2), Image.LANCZOS)
-    combined = Image.new("RGB", (w, h1 + h2))
-    combined.paste(i1, (0, 0))
-    combined.paste(i2, (0, h1))
-    # Crop to 4:5 Instagram portrait ratio (1080x1350)
-    target_h = 1350
-    total_h = h1 + h2
-    if total_h >= target_h:
-        top = (total_h - target_h) // 2
-        combined = combined.crop((0, top, w, top + target_h))
-    else:
-        padded = Image.new("RGB", (w, target_h), (255, 255, 255))
-        padded.paste(combined, (0, (target_h - total_h) // 2))
-        combined = padded
-    combined.save(output_path, quality=95)
-    print(f"  🖼️  Saved: {output_path} (1080x1350)")
+    """Combine two images into perfect Instagram 4:5 ratio.
+    Each image gets exactly half the canvas — no cropping, both fully visible.
+    """
+    from PIL import ImageDraw, ImageFont
+    W = 1080
+    HALF_H = 675          # Each image gets 675px — total 1350px = perfect 4:5
+    DIVIDER = 6           # Thin divider line between images
+    LABEL_H = 60          # Height of year label bar
+    CANVAS_H = HALF_H * 2 + DIVIDER  # 1356px total
+
+    # Open and resize both images to exactly W x HALF_H (fill, center crop)
+    def fit_image(path, w, h):
+        img = Image.open(path).convert("RGB")
+        # Scale to fill the target box
+        scale = max(w / img.width, h / img.height)
+        new_w = int(img.width * scale)
+        new_h = int(img.height * scale)
+        img = img.resize((new_w, new_h), Image.LANCZOS)
+        # Center crop
+        left = (new_w - w) // 2
+        top  = (new_h - h) // 2
+        return img.crop((left, top, left + w, top + h))
+
+    img_top = fit_image(img1_path, W, HALF_H)
+    img_bot = fit_image(img2_path, W, HALF_H)
+
+    # Create canvas
+    canvas = Image.new("RGB", (W, CANVAS_H), (20, 20, 20))
+    canvas.paste(img_top, (0, 0))
+    canvas.paste(img_bot, (0, HALF_H + DIVIDER))
+
+    # Add dark overlay strip + year label on each half
+    draw = ImageDraw.Draw(canvas)
+
+    # Top label (THEN year) — bottom of top image
+    draw.rectangle([(0, HALF_H - LABEL_H), (W, HALF_H)], fill=(0, 0, 0, 180))
+    draw.rectangle([(0, HALF_H + DIVIDER), (W, HALF_H + DIVIDER + LABEL_H)], fill=(0, 0, 0, 180))
+
+    # Try to load a font, fallback to default
+    try:
+        font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 42)
+        font_sm = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 28)
+    except:
+        font = ImageFont.load_default()
+        font_sm = font
+
+    # Year labels
+    draw.text((40, HALF_H - LABEL_H + 10), "THEN", font=font, fill=(255, 255, 255))
+    draw.text((40, HALF_H + DIVIDER + 10), "NOW  2026", font=font, fill=(255, 215, 0))
+
+    # Divider line
+    draw.rectangle([(0, HALF_H), (W, HALF_H + DIVIDER)], fill=(255, 215, 0))
+
+    # Final resize to exact 1080x1350
+    final = canvas.resize((1080, 1350), Image.LANCZOS)
+    final.save(output_path, quality=95)
+    print(f"  🖼️  Saved: {output_path} (1080x1350 — both images fully visible)")
     return output_path
 
 
