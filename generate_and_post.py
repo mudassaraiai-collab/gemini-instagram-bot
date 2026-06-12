@@ -21,6 +21,7 @@ import os, io, time, base64, argparse, json
 import requests
 from PIL import Image
 from dotenv import load_dotenv
+import rediffmail
 
 load_dotenv()
 
@@ -465,6 +466,15 @@ def run_pipeline(series_key, ep_index):
     mid      = instagram_post(url, ep["caption"])
 
     print(f"\n  ✅ LIVE on @maddy_4589! Media ID: {mid}\n")
+
+    rediffmail.send_post_notification(
+        title=ep["title"],
+        series=s["name"],
+        episode=num,
+        instagram_id=mid,
+        image_url=url,
+        image_path=combined,
+    )
     return mid
 
 
