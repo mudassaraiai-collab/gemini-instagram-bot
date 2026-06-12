@@ -3,3 +3,6 @@ output/
 __pycache__/
 *.pyc
 .DS_Store
+*.mp4
+viral_kids_final.html
+posted_state.json
